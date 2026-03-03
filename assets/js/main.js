@@ -95,9 +95,10 @@ function loadCharacterSetup() {
         scene.add(object);
 
         // Ahora cargamos las animaciones por separado
-        loadAnimation('models/fbx/excited.fbx', 'excited');
         loadAnimation('models/fbx/Shoved.fbx', 'shoved');
+		loadAnimation('models/fbx/excited.fbx', 'excited');
         loadAnimation('models/fbx/Bboy.fbx', 'bboy');
+		loadAnimation('models/fbx/Brooklyn.fbx', 'brooklyn');
 	
         // Puedes agregar más aquí: loadAnimation('models/fbx/jump.fbx', 'jump');
     });
@@ -136,16 +137,17 @@ function onKeyDown(event) {
     // Mapeamos las teclas a los nombres de las animaciones
     switch (event.key) {
         case '1':
-            nextActionName = 'excited';
+           nextActionName = 'shoved';
             break;
         case '2':
-            nextActionName = 'shoved';
+            
+			 nextActionName = 'excited';
             break;
         case '3':
             nextActionName = 'bboy';
             break;
 		case '4':
-            nextActionName = '';
+            nextActionName = 'brooklyn';
             break;
 		case '5':
             nextActionName = 'run';
