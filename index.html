@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-		<title>three.js webgl - FBX loader</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link type="text/css" rel="stylesheet" href="/assets/css/main.css">
-	</head>
+    <head>
+        <title>Three.js - Animaciones Mixamo</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="./assets/css/main.css">
+    </head>
 
-	<body>
-		<div id="info">
-			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - FBXLoader<br />
-			Character and animation from <a href="https://www.mixamo.com/" target="_blank" rel="noopener">Mixamo</a>
-		</div>
+    <body>
+        <div id="info">
+            <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - FBXLoader<br />
+            Character and animation from <a href="https://www.mixamo.com/" target="_blank" rel="noopener">Mixamo</a>
+        </div>
 
-		<script type="importmap">
-			{
-				"imports": {
-					"three": "./assets/build/three.module.js",
-					"three/addons/": "./assets/jsm/"
-				}
-			}
-		</script>
+        <div id="menu-instrucciones">
+            <h2>🕺 Controles de Baile</h2>
+            <p>Presiona los números:</p>
+            <ul>
+                <li><span class="tecla">1</span> Thriller</li>
+                <li><span class="tecla">2</span> Emocionado</li>
+                <li><span class="tecla">3</span> Breakdance</li>
+                <li><span class="tecla">4</span> Breakdance (Variación)</li>
+                <li><span class="tecla">5</span> Snake</li>
+            </ul>
+            <p class="nota">Por defecto: Zombie</p>
+        </div>
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "./assets/build/three.module.js",
+                    "three/addons/": "./assets/jsm/"
+                }
+            }
+        </script>
 
-		<script type="module" src="./assets/js/main.js"></script>
+        <script type="module" src="./assets/js/main.js"></script>
 
-	</body>
+    </body>
 </html>
