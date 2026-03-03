@@ -97,8 +97,9 @@ function loadCharacterSetup() {
         // Ahora cargamos las animaciones por separado
         loadAnimation('models/fbx/Shoved.fbx', 'shoved');
 		loadAnimation('models/fbx/excited.fbx', 'excited');
-        loadAnimation('models/fbx/Bboy.fbx', 'bboy');
-		loadAnimation('models/fbx/Brooklyn.fbx', 'brooklyn');
+        loadAnimation('models/fbx/Breakdance.fbx', 'breakdance');
+		loadAnimation('models/fbx/Breakdance1.fbx', 'breakdance1');
+		loadAnimation('models/fbx/Snake.fbx', 'snake');
 	
         // Puedes agregar más aquí: loadAnimation('models/fbx/jump.fbx', 'jump');
     });
@@ -144,13 +145,13 @@ function onKeyDown(event) {
 			 nextActionName = 'excited';
             break;
         case '3':
-            nextActionName = 'bboy';
+            nextActionName = 'breakdance';
             break;
 		case '4':
-            nextActionName = 'brooklyn';
+            nextActionName = 'breakdance1';
             break;
 		case '5':
-            nextActionName = 'run';
+            nextActionName = 'snake';
             break;
 			
     }
