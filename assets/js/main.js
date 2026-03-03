@@ -8,7 +8,7 @@ const manager = new THREE.LoadingManager();
 let camera, scene, renderer, stats, loader;
 let mixer;
 
-// Diccionario para guardar nuestras animaciones y rastrear la actual
+// Diccionario 
 const actions = {};
 let currentAction = null;
 
@@ -71,7 +71,7 @@ function init() {
 
     window.addEventListener('resize', onWindowResize);
     
-    // 2. Escuchar el teclado
+    
     window.addEventListener('keydown', onKeyDown);
 
     stats = new Stats();
@@ -94,14 +94,15 @@ function loadCharacterSetup() {
 
         scene.add(object);
 
-        // Ahora cargamos las animaciones por separado
-        loadAnimation('models/fbx/Shoved.fbx', 'shoved');
+        // cargamos las animaciones por separado
+		loadAnimation('models/fbx/zombie.fbx', 'zombie');
+		loadAnimation('models/fbx/Thriller.fbx', 'Thriller');
 		loadAnimation('models/fbx/excited.fbx', 'excited');
         loadAnimation('models/fbx/Breakdance.fbx', 'breakdance');
 		loadAnimation('models/fbx/Breakdance1.fbx', 'breakdance1');
 		loadAnimation('models/fbx/Snake.fbx', 'snake');
 	
-        // Puedes agregar más aquí: loadAnimation('models/fbx/jump.fbx', 'jump');
+      
     });
 }
 
@@ -109,9 +110,7 @@ function loadAnimation(path, name) {
     loader.load(path, function (animObject) {
         const clip = animObject.animations[0];
 
-        // --- EL TRUCO PARA REPARAR ANIMACIONES DE MIXAMO ---
-        // Recorremos todos los huesos de la animación y les borramos 
-        // cualquier texto que esté antes del símbolo "|"
+       
         clip.tracks.forEach(function (track) {
             track.name = track.name.replace(/.*\|/, '');
         });
@@ -119,12 +118,12 @@ function loadAnimation(path, name) {
 
         const action = mixer.clipAction(clip);
         
-        // Lo guardamos en nuestro diccionario
+      
         actions[name] = action;
 
-        // Si quieres que inicie moviéndose automáticamente, descomenta lo siguiente:
-        
-        if (name === 'excited') {
+        // inicio moviéndose automáticamente
+
+        if (name === 'zombie') {
             currentAction = action;
             currentAction.play();
         }
@@ -138,7 +137,7 @@ function onKeyDown(event) {
     // Mapeamos las teclas a los nombres de las animaciones
     switch (event.key) {
         case '1':
-           nextActionName = 'shoved';
+           nextActionName = 'Thriller';
             break;
         case '2':
             
@@ -160,8 +159,7 @@ function onKeyDown(event) {
     if (nextActionName && actions[nextActionName] && currentAction !== actions[nextActionName]) {
         const nextAction = actions[nextActionName];
         
-        // ¡LA SOLUCIÓN ESTÁ AQUÍ! 
-        // Solo hacemos fadeOut si currentAction no es null
+   
         if (currentAction) {
             currentAction.fadeOut(0.5);
         }
