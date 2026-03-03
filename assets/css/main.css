@@ -89,3 +89,66 @@ a, button, input, select {
 	margin-top: 20px;
 	padding: 10px;
 }
+/* --- ESTILOS DEL MENÚ DE INSTRUCCIONES --- */
+#menu-instrucciones {
+    position: absolute;
+    top: 60px; /* Un poco más abajo para que no choque con el div #info */
+    left: 20px;
+    background-color: rgba(15, 15, 20, 0.85); /* Fondo oscuro semitransparente */
+    color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-family: 'Roboto Mono', monospace, sans-serif; /* Combina con la fuente de tu proyecto */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    pointer-events: none; /* Permite que el mouse interactúe con el 3D a través del menú */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#menu-instrucciones h2 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #4CAF50; /* Un verde vibrante para el título */
+    text-align: left;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 8px;
+}
+
+#menu-instrucciones p {
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: #cccccc;
+}
+
+#menu-instrucciones ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu-instrucciones li {
+    margin-bottom: 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.tecla {
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-right: 12px;
+    box-shadow: 0px 3px 0px #aaaaaa; /* Efecto de tecla mecánica */
+    display: inline-block;
+}
+
+.nota {
+    margin-top: 15px;
+    font-size: 12px !important;
+    color: #888888 !important;
+    text-align: left;
+    font-style: italic;
+}
