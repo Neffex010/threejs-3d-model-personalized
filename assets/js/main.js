@@ -8,7 +8,7 @@ const manager = new THREE.LoadingManager();
 let camera, scene, renderer, stats, loader;
 let mixer;
 
-// Diccionario 
+// Diccionario de animaciones
 const actions = {};
 let currentAction = null;
 
@@ -71,20 +71,18 @@ function init() {
 
     window.addEventListener('resize', onWindowResize);
     
-    
+    // Eventos de teclado (Al presionar y al soltar)
     window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('keyup', onKeyUp);
 
     stats = new Stats();
     container.appendChild(stats.dom);
 }
 
 function loadCharacterSetup() {
-    // Primero cargamos el modelo base (T-Pose)
     loader.load('models/fbx/skin.fbx', function (object) {
-        
         mixer = new THREE.AnimationMixer(object);
 
-        // Configuramos sombras para el personaje
         object.traverse(function (child) {
             if (child.isMesh) {
                 child.castShadow = true;
@@ -94,15 +92,13 @@ function loadCharacterSetup() {
 
         scene.add(object);
 
-        // cargamos las animaciones por separado
-		loadAnimation('models/fbx/zombie.fbx', 'zombie');
-		loadAnimation('models/fbx/Thriller.fbx', 'Thriller');
-		loadAnimation('models/fbx/excited.fbx', 'excited');
+        // Cargamos las animaciones
+        loadAnimation('models/fbx/zombie.fbx', 'zombie');
+        loadAnimation('models/fbx/Thriller.fbx', 'Thriller');
+        loadAnimation('models/fbx/excited.fbx', 'excited');
         loadAnimation('models/fbx/Breakdance.fbx', 'breakdance');
-		loadAnimation('models/fbx/Breakdance1.fbx', 'breakdance1');
-		loadAnimation('models/fbx/Snake.fbx', 'snake');
-	
-      
+        loadAnimation('models/fbx/Breakdance1.fbx', 'breakdance1');
+        loadAnimation('models/fbx/Snake.fbx', 'snake');
     });
 }
 
@@ -110,64 +106,85 @@ function loadAnimation(path, name) {
     loader.load(path, function (animObject) {
         const clip = animObject.animations[0];
 
-       
+        // Truco para limpiar el nombre de los huesos
         clip.tracks.forEach(function (track) {
             track.name = track.name.replace(/.*\|/, '');
         });
-        // --------------------------------------------------
 
         const action = mixer.clipAction(clip);
-        
-      
         actions[name] = action;
 
-        // inicio moviéndose automáticamente
-
+        // Iniciar automáticamente
         if (name === 'zombie') {
             currentAction = action;
             currentAction.play();
         }
-        
     });
 }
 
+// --- LÓGICA CUANDO PRESIONAS LA TECLA ---
 function onKeyDown(event) {
     let nextActionName;
+    let teclaId;
 
-    // Mapeamos las teclas a los nombres de las animaciones
     switch (event.key) {
         case '1':
-           nextActionName = 'Thriller';
+            nextActionName = 'Thriller';
+            teclaId = 'tecla-1';
             break;
         case '2':
-            
-			 nextActionName = 'excited';
+            nextActionName = 'excited';
+            teclaId = 'tecla-2';
             break;
         case '3':
             nextActionName = 'breakdance';
+            teclaId = 'tecla-3';
             break;
-		case '4':
+        case '4':
             nextActionName = 'breakdance1';
+            teclaId = 'tecla-4';
             break;
-		case '5':
+        case '5':
             nextActionName = 'snake';
+            teclaId = 'tecla-5';
             break;
-			
     }
 
-    // Si presionamos una tecla válida, la animación existe y no es la actual...
+    // Efecto visual en la pantalla: añade la clase "activa"
+    if (teclaId) {
+        const teclaUI = document.getElementById(teclaId);
+        if (teclaUI) teclaUI.classList.add('activa');
+    }
+
+    // Cambio de animación 3D
     if (nextActionName && actions[nextActionName] && currentAction !== actions[nextActionName]) {
         const nextAction = actions[nextActionName];
         
-   
         if (currentAction) {
             currentAction.fadeOut(0.5);
         }
         
         nextAction.reset().fadeIn(0.5).play();
-        
-        // Actualizamos la acción actual
         currentAction = nextAction;
+    }
+}
+
+// --- LÓGICA CUANDO SUELTAS LA TECLA ---
+function onKeyUp(event) {
+    let teclaId;
+
+    switch (event.key) {
+        case '1': teclaId = 'tecla-1'; break;
+        case '2': teclaId = 'tecla-2'; break;
+        case '3': teclaId = 'tecla-3'; break;
+        case '4': teclaId = 'tecla-4'; break;
+        case '5': teclaId = 'tecla-5'; break;
+    }
+
+    // Efecto visual en la pantalla: quita la clase "activa" para que la tecla suba
+    if (teclaId) {
+        const teclaUI = document.getElementById(teclaId);
+        if (teclaUI) teclaUI.classList.remove('activa');
     }
 }
 
@@ -181,7 +198,6 @@ function animate() {
     timer.update();
     const delta = timer.getDelta();
 
-    // Actualizamos el mixer de animaciones
     if (mixer) mixer.update(delta);
 
     renderer.render(scene, camera);

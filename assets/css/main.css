@@ -1,124 +1,93 @@
+/* --- VARIABLES DE COLOR --- */
+:root {
+    --color-fondo: #111111;
+    --color-texto: #ffffff;
+    --color-acento: #4CAF50; /* Verde vibrante */
+    --color-enlace: #ffd700; /* Dorado */
+    --color-tecla: #eeeeee;
+}
+
+/* --- ESTILOS BASE --- */
 body {
-	margin: 0;
-	background-color: #000;
-	color: #fff;
-	font-family: Monospace;
-	font-size: 13px;
-	line-height: 24px;
-	overscroll-behavior: none;
+    margin: 0;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
+    font-size: 13px;
+    line-height: 24px;
+    overscroll-behavior: none;
+    overflow: hidden; 
 }
 
 a {
-	color: #ff0;
-	text-decoration: none;
+    color: var(--color-enlace);
+    text-decoration: none;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 a:hover {
-	text-decoration: underline;
+    color: #ffffff;
+    text-shadow: 0px 0px 8px var(--color-enlace);
 }
 
 button {
-	cursor: pointer;
-	text-transform: uppercase;
+    cursor: pointer;
+    text-transform: uppercase;
 }
 
+/* --- ENCABEZADO SUPERIOR --- */
 #info {
-	position: absolute;
-	top: 0px;
-	width: 100%;
-	padding: 10px;
-	box-sizing: border-box;
-	text-align: center;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	pointer-events: none;
-	z-index: 1; /* TODO Solve this in HTML */
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    z-index: 10;
 }
 
 a, button, input, select {
-	pointer-events: auto;
+    pointer-events: auto;
 }
 
-.lil-gui {
-	z-index: 2 !important; /* TODO Solve this in HTML */
-}
-
-@media all and ( max-width: 640px ) {
-	.lil-gui.root { 
-		right: auto;
-		top: auto;
-		max-height: 50%;
-		max-width: 80%;
-		bottom: 0;
-		left: 0;
-	}
-}
-
-#overlay {
-	position: absolute;
-	font-size: 16px;
-	z-index: 2;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	background: rgba(0,0,0,0.7);
-}
-
-	#overlay button {
-		background: transparent;
-		border: 0;
-		border: 1px solid rgb(255, 255, 255);
-		border-radius: 4px;
-		color: #ffffff;
-		padding: 12px 18px;
-		text-transform: uppercase;
-		cursor: pointer;
-	}
-
-#notSupported {
-	width: 50%;
-	margin: auto;
-	background-color: #f00;
-	margin-top: 20px;
-	padding: 10px;
-}
 /* --- ESTILOS DEL MENÚ DE INSTRUCCIONES --- */
 #menu-instrucciones {
     position: absolute;
-    top: 60px; /* Un poco más abajo para que no choque con el div #info */
+    top: 70px;
     left: 20px;
-    background-color: rgba(15, 15, 20, 0.85); /* Fondo oscuro semitransparente */
-    color: #ffffff;
-    padding: 15px 20px;
-    border-radius: 12px;
-    font-family: 'Roboto Mono', monospace, sans-serif; /* Combina con la fuente de tu proyecto */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+    background-color: rgba(15, 15, 20, 0.6); 
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--color-texto);
+    padding: 20px 25px;
+    border-radius: 16px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5), inset 0px 1px 0px rgba(255, 255, 255, 0.1);
     z-index: 100;
-    pointer-events: none; /* Permite que el mouse interactúe con el 3D a través del menú */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none; 
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 #menu-instrucciones h2 {
     margin-top: 0;
     font-size: 18px;
-    color: #4CAF50; /* Un verde vibrante para el título */
+    color: var(--color-acento);
     text-align: left;
     margin-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 10px;
+    letter-spacing: 0.5px;
 }
 
 #menu-instrucciones p {
     font-size: 14px;
-    margin-bottom: 12px;
-    color: #cccccc;
+    margin-bottom: 15px;
+    color: #dddddd;
 }
 
 #menu-instrucciones ul {
@@ -128,27 +97,61 @@ a, button, input, select {
 }
 
 #menu-instrucciones li {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     font-size: 14px;
     display: flex;
     align-items: center;
 }
 
+/* --- DISEÑO DE LAS TECLAS --- */
 .tecla {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: var(--color-tecla);
+    color: #222222;
     font-weight: bold;
-    padding: 4px 10px;
+    font-size: 13px;
+    padding: 4px 12px;
     border-radius: 6px;
-    margin-right: 12px;
-    box-shadow: 0px 3px 0px #aaaaaa; /* Efecto de tecla mecánica */
+    margin-right: 15px;
+    box-shadow: 0px 4px 0px #999999, 0px 5px 5px rgba(0,0,0,0.4); 
     display: inline-block;
+    border: 1px solid #ffffff;
+    transition: all 0.1s ease; /* Para que el efecto de presionar sea suave */
+}
+
+/* Clase que aplicará JS cuando la tecla se presione */
+.tecla.activa {
+    background-color: var(--color-acento);
+    color: #ffffff;
+    box-shadow: 0px 0px 0px #999999, 0px 1px 2px rgba(0,0,0,0.4); 
+    transform: translateY(4px); 
 }
 
 .nota {
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: 12px !important;
-    color: #888888 !important;
+    color: #999999 !important;
     text-align: left;
     font-style: italic;
+    border-top: 1px dashed rgba(255,255,255,0.1);
+    padding-top: 10px;
+}
+
+/* --- RESPONSIVE PARA MÓVILES --- */
+@media all and (max-width: 640px) {
+    #menu-instrucciones {
+        top: auto;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 85%;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+    #menu-instrucciones h2 {
+        font-size: 16px;
+        text-align: center;
+    }
+    .tecla {
+        margin-right: 10px;
+    }
 }
