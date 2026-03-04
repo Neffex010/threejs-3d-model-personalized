@@ -35,31 +35,73 @@ button {
     text-transform: uppercase;
 }
 
-/* --- ENCABEZADO SUPERIOR --- */
-#info {
+/* --- NAVBAR (BARRA SUPERIOR) --- */
+#navbar {
     position: absolute;
-    top: 0px;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
     box-sizing: border-box;
-    text-align: center;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    pointer-events: none;
-    z-index: 10;
+    background: rgba(15, 15, 20, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000; /* Siempre arriba */
 }
 
-a, button, input, select {
-    pointer-events: auto;
+.nav-logo {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--color-acento);
+    letter-spacing: 1px;
+}
+
+.nav-links a {
+    margin-left: 25px;
+    color: #ffffff;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+}
+
+.nav-links a:hover {
+    color: var(--color-acento);
+    text-shadow: none;
+}
+
+/* --- FOOTER (PIE DE PÁGINA) --- */
+#footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    box-sizing: border-box;
+    background: rgba(15, 15, 20, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+}
+
+#footer p {
+    margin: 0;
+    font-size: 12px;
+    color: #aaaaaa;
+    letter-spacing: 0.5px;
+    font-family: sans-serif;
 }
 
 /* --- ESTILOS DEL MENÚ DE INSTRUCCIONES --- */
 #menu-instrucciones {
     position: absolute;
-    top: 70px;
+    top: 90px; /* Bajó un poco para dar espacio al navbar */
     left: 20px;
     background-color: rgba(15, 15, 20, 0.6); 
     backdrop-filter: blur(8px); 
@@ -115,10 +157,9 @@ a, button, input, select {
     box-shadow: 0px 4px 0px #999999, 0px 5px 5px rgba(0,0,0,0.4); 
     display: inline-block;
     border: 1px solid #ffffff;
-    transition: all 0.1s ease; /* Para que el efecto de presionar sea suave */
+    transition: all 0.1s ease;
 }
 
-/* Clase que aplicará JS cuando la tecla se presione */
 .tecla.activa {
     background-color: var(--color-acento);
     color: #ffffff;
@@ -138,9 +179,15 @@ a, button, input, select {
 
 /* --- RESPONSIVE PARA MÓVILES --- */
 @media all and (max-width: 640px) {
+    #navbar {
+        padding: 15px 20px;
+    }
+    .nav-links {
+        display: none; /* Oculta los links en celular para que no estorben */
+    }
     #menu-instrucciones {
         top: auto;
-        bottom: 20px;
+        bottom: 60px; /* Sube un poco para no tapar el footer */
         left: 50%;
         transform: translateX(-50%);
         width: 85%;

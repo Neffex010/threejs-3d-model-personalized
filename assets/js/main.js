@@ -75,7 +75,17 @@ function init() {
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('keyup', onKeyUp);
 
+    // stats
     stats = new Stats();
+    
+    // Limpiamos la posición de arriba a la izquierda
+    stats.dom.style.top = 'auto';
+    stats.dom.style.left = 'auto';
+    
+    // Lo anclamos abajo a la derecha (50px de margen para no tapar el footer)
+    stats.dom.style.bottom = '50px';
+    stats.dom.style.right = '20px';
+
     container.appendChild(stats.dom);
 }
 
@@ -202,4 +212,5 @@ function animate() {
 
     renderer.render(scene, camera);
     stats.update();
+	
 }
